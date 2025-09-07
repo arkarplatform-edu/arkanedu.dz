@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة اركان التعليمية - المحتوى التعليمي</title>
+    <!-- Bootstrap RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/48/000000/graduation-cap.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Import IBM Sans Arabic Font */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary-color: #5c3b23;
+            --secondary-color: #a67c52;
+            --accent-color: #a67c52;
+            --light-bg: #ffffff;
+            --dark-bg: #2d1a0b;
+            --dark-card-bg: #3e2612;
+            --dark-hover: #6e4b2a;
+            --light-text: #3e2612;
+            --dark-text: #fff8f0;
+            --dark-text-secondary: #e2cdb0;
+            --gradient-1: linear-gradient(135deg, #5c3b23 0%, #a67c52 100%);
+            --gradient-2: linear-gradient(45deg, #a67c52 0%, #5c3b23 100%);
+            --card-shadow: 0 4px 15px rgba(92, 59, 35, 0.08);
+            --hover-shadow: 0 8px 25px rgba(92, 59, 35, 0.15);
+            --transition-base: all 0.3s ease;
+            --border-radius-lg: 15px;
+            --border-radius-sm: 10px;
+            --spacing-base: 1rem;
+            --spacing-lg: 2rem;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            margin-top: 76px;
+            line-height: 1.6;
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            h1 { font-size: calc(1.8rem + 1vw); }
+            h2 { font-size: calc(1.5rem + 0.8vw); }
+            h3 { font-size: calc(1.3rem + 0.6vw); }
+            .course-title { font-size: 1.1rem; }
+        }
+
+        /* Enhanced Card Styles */
+        .course-card {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: var(--transition-base);
+            border: none;
+            box-shadow: var(--card-shadow);
+            background: var(--light-bg);
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .course-card img {
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition-base);
+            transform-origin: center;
+        }
+
+        .course-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            border-radius: var(--border-radius-sm);
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            transition: var(--transition-base);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        /* Course Grid Styling */
+        .course-grid {
+            padding: 2rem 0;
+        }
+
+        .course-info {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            line-height: 1.4;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            height: 3.2rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .course-rating {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .course-rating span {
+            color: #666;
+            margin-right: 5px;
+        }
+
+        .course-price-and-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .enroll-btn {
+            background: linear-gradient(45deg, #2937f0, #9f1ae2);
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            transition: var(--transition-base);
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 55, 240, 0.3);
+        }
+
+        .enroll-btn i {
+            margin-left: 5px;
+        }
+
+        /* تنسيق العناوين */
+        section h2 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #2937f0, #9f1ae2);
+            border-radius: 2px;
+        }
+
+        /* تنسيق الأقسام */
+        .course-grid {
+            padding: 5rem 0;
+        }
+
+        .course-grid:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* تنسيق قسم الفلترة */
+        .filters {
+            padding: 2rem 0;
+            background: var(--light-bg);
+            margin-bottom: 1rem;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius-lg);
+            font-size: 1rem;
+            transition: var(--transition-base);
+            background-color: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.25rem;
+        }
+
+        /* تنسيق العناوين */
+        section h2 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #2937f0, #9f1ae2);
+            border-radius: 2px;
+        }
+
+        /* تنسيق الفوتر */
+        footer {
+            background: var(--dark-bg) !important;
+        }
+
+        footer h4, footer h5 {
+            color: var(--dark-text);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        footer h4::after, footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .text-light-gray {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        .footer-links a {
+            transition: var(--transition-base);
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .footer-links a::before {
+            content: '\f054';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            opacity: 0;
+            transition: var(--transition-base);
+        }
+
+        .footer-links a:hover {
+            padding-right: 20px;
+            color: var(--primary-color) !important;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition-base);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--dark-text);
+            padding: 0.8rem 1.2rem;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .newsletter-form .form-control::placeholder {
+            color: var(--dark-text-secondary);
+        }
+
+        .newsletter-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .newsletter-form .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            background: var(--gradient-1);
+            border: none;
+        }
+
+        .newsletter-form .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-graduation-cap me-2 text-primary fa-lg"></i>
+                <span class="fw-bold">منصة اركان التعليمية</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">الدورات</a>
+                    </li>
+                    
+                </ul>
+                <div class="ms-auto">
+                    
+                    <div id="userDropdown" class="d-none">
+                        <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown">
+            <i class="fas fa-user-circle me-1"></i>
+            <span id="userDisplayName">المستخدم</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
+            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-circle"></i> الملف الشخصي</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button class="dropdown-item text-danger" id="logoutButton">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button></li>
+        </ul>
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+
+   
+
+    <!-- Filters Section -->
+    <section class="filters">
+        <div class="container">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="ابحث عن الدورات...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <!-- تم حذف أزرار الفلترة هنا بناءً على طلبك -->
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+<section id="courses" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" data-aos="fade-up">الدورات المتاحة</h2>
+        <div class="row g-4" id="coursesGrid">
+            <!-- بطاقات الدورات مباشرة في HTML -->
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="course-card card">
+                    <img src="https://img.icons8.com/color/200/000000/python.png" class="card-img-top" alt="مقدمة في البرمجة">
+                    <div class="card-body">
+                        <h5 class="card-title">مقدمة في البرمجة</h5>
+                        <p class="card-text">تعلم أساسيات البرمجة باستخدام لغة بايثون بطريقة سهلة وعملية.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="course-price">2000 دج</span>
+                            <a class="btn btn-primary" href="https://forms.gle/your-google-form-link" target="_blank">سجل الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- يمكنك تكرار البطاقة لدورات أخرى مع تغيير الرابط -->
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>منصة أركان التعليمية</h5>
+                    <p>منصة تعليمية رائدة في الوطن العربي</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

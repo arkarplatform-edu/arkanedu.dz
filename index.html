@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Hover.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <!-- Simple Line Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
     <style>
         /* Import IBM Sans Arabic Font */
         @import url('https://fonts.googleapis.com/css2?family=IBM+Sans+Arabic:wght@200;300;400;500;600;700;800;900&display=swap');
@@ -49,7 +53,7 @@
             font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
             background-color: var(--light-bg);
             color: var(--light-text);
-            margin-top: 76px;
+            margin-top: 0;
             line-height: 1.6;
         }
 
@@ -61,32 +65,188 @@
             .course-title { font-size: 1.1rem; }
         }
 
-        /* Enhanced Card Styles */
+        /* Course Categories Navigation */
+        .category-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            background: white;
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(92, 59, 35, 0.2);
+        }
+
+        .category-btn i {
+            margin-left: 0.5rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(166, 124, 82, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        /* Enhanced Card Styles with Modern Effects */
         .course-card {
-            border-radius: var(--border-radius-lg);
+            border-radius: 12px;
             overflow: hidden;
-            transition: var(--transition-base);
-            border: none;
-            box-shadow: var(--card-shadow);
-            background: var(--light-bg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(92, 59, 35, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            background: white;
             height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-1);
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            transform: scale(0.98);
         }
 
         .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--hover-shadow);
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Enhanced course card animations */
+        .course-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .course-card:nth-child(1) { animation-delay: 0.1s; }
+        .course-card:nth-child(2) { animation-delay: 0.2s; }
+        .course-card:nth-child(3) { animation-delay: 0.3s; }
+        .course-card:nth-child(4) { animation-delay: 0.4s; }
+        .course-card:nth-child(5) { animation-delay: 0.5s; }
+        .course-card:nth-child(6) { animation-delay: 0.6s; }
+        .course-card:nth-child(7) { animation-delay: 0.7s; }
+        .course-card:nth-child(8) { animation-delay: 0.8s; }
+        .course-card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Improved badge styling */
+        .badge {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .course-card:hover .badge::before {
+            left: 100%;
+        }
+
+        .course-card:hover::before {
+            opacity: 0.05;
+            transform: scale(1);
+        }
+
+        /* Course Level Badges */
+        .badge-level {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-right: 0.3rem;
+        }
+
+        .badge-level.bg-primary {
+            background-color: rgba(92, 59, 35, 0.1) !important;
+            color: var(--primary-color) !important;
+        }
+
+        .badge-level.bg-secondary {
+            background-color: rgba(108, 117, 125, 0.1) !important;
+            color: #6c757d !important;
+        }
+
+        .badge-level.bg-success {
+            background-color: rgba(40, 167, 69, 0.1) !important;
+            color: #28a745 !important;
+        }
+
+        .badge-level.bg-info {
+            background-color: rgba(23, 162, 184, 0.1) !important;
+            color: #17a2b8 !important;
         }
 
         .course-card img {
             height: 200px;
+            width: 100%;
             object-fit: cover;
-            transition: var(--transition-base);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             transform-origin: center;
+            position: relative;
+            z-index: 1;
+            filter: brightness(0.95);
         }
 
         .course-card:hover img {
             transform: scale(1.05);
+            filter: brightness(1);
         }
+
 
         /* Enhanced Button Styles */
         .btn {
@@ -109,18 +269,6 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
 
-        /* Navbar Styling */
-        .navbar {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95) !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
-        }
 
         /* Course Grid Styling */
         .course-grid {
@@ -129,14 +277,42 @@
 
         .course-info {
             padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+            background: white;
+            transition: all 0.4s ease;
+        }
+
+        .course-card:hover .course-info {
+            transform: translateY(-5px);
         }
 
         .course-title {
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin: 0.5rem 0 0.75rem;
             color: var(--primary-color);
             line-height: 1.4;
+            transition: all 0.3s ease;
+            position: relative;
+            display: block;
+        }
+
+        .course-instructor {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .course-instructor i {
+            margin-left: 0.3rem;
+            color: var(--accent-color);
+        }
+
+        .course-card:hover .course-title {
+            color: var(--accent-color);
         }
 
         .course-description {
@@ -154,47 +330,196 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 1rem;
+            margin: 1.5rem 0 1rem;
             padding-top: 1rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .course-card:hover .course-meta {
+            border-top-color: rgba(166, 124, 82, 0.2);
+        }
+
+        .course-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #666;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .course-card:hover .course-meta-item {
+            color: var(--primary-color);
+            background: rgba(166, 124, 82, 0.1);
+        }
+
+        .course-meta-item i {
+            font-size: 0.9rem;
+            color: var(--accent-color);
         }
 
         .course-rating {
             color: #ffc107;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .course-rating .stars {
+            display: inline-flex;
+            position: relative;
+        }
+
+        .course-rating .stars::before {
+            content: '★★★★★';
+            color: #e2e8f0;
+            letter-spacing: 2px;
+        }
+
+        .course-rating .stars::after {
+            content: '★★★★★';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #ffc107;
+            overflow: hidden;
+            white-space: nowrap;
+            width: var(--rating-width, 100%);
         }
 
         .course-rating span {
             color: #666;
             margin-right: 5px;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        .course-price-and-button {
+        .course-card:hover .course-rating span {
+            color: var(--primary-color);
+        }
+
+        .course-price {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+        }
+
+        .current-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .original-price {
+            font-size: 0.85rem;
+            color: #999;
         }
 
         .badge {
             padding: 0.5rem 0.75rem;
             font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+        }
+
+        .course-card:hover .badge {
+            background: var(--gradient-1);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(92, 59, 35, 0.1), 0 2px 4px -1px rgba(92, 59, 35, 0.06);
         }
 
         .enroll-btn {
-            background: linear-gradient(45deg, #2937f0, #9f1ae2);
+            background: var(--gradient-1);
             border: none;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            transition: var(--transition-base);
+            padding: 0.6rem 1.4rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white !important;
+            text-decoration: none !important;
+            box-shadow: 0 4px 15px rgba(166, 124, 82, 0.3);
+        }
+
+        .enroll-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--gradient-2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+            border-radius: 50px;
+            opacity: 0.9;
         }
 
         .enroll-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(41, 55, 240, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(166, 124, 82, 0.4);
+        }
+
+        .enroll-btn:hover::before {
+            width: 100%;
+            opacity: 1;
         }
 
         .enroll-btn i {
-            margin-left: 5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+        }
+
+        .enroll-btn:hover i {
+            transform: translateX(4px) scale(1.1);
+        }
+
+        /* Progress Bar */
+        .progress {
+            height: 6px !important;
+            border-radius: 3px;
+            background-color: #f0f0f0;
+            overflow: visible;
+            margin: 1.2rem 0 1.5rem;
+        }
+
+        .progress-bar {
+            background: var(--gradient-1) !important;
+            border-radius: 3px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .progress-bar::after {
+            content: attr(aria-valuenow)'%';
+            position: absolute;
+            top: -25px;
+            right: 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         /* تنسيق العناوين */
@@ -382,87 +707,664 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .course-card {
+                margin-bottom: 2rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            body {
+                margin-top: 0;
+                font-size: 0.9rem;
+            }
+
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .course-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .course-card img {
+                height: 180px;
+            }
+
+            .course-title {
+                font-size: 1.1rem;
+                line-height: 1.3;
+            }
+
+            .course-description {
+                font-size: 0.9rem;
+                height: 2.7rem;
+                -webkit-line-clamp: 2;
+            }
+
+            .course-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: flex-start !important;
+            }
+
+            .course-meta-item {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .current-price {
+                font-size: 1.1rem;
+            }
+
+            .enroll-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .course-grid {
+                padding: 3rem 0;
+            }
+
+            .py-5 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+
+            .py-4 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                max-width: 540px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            body {
+                margin-top: 0;
+                font-size: 0.85rem;
+            }
+
+            .category-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .course-card img {
+                height: 160px;
+            }
+
+            .course-title {
+                font-size: 1rem;
+            }
+
+            .course-description {
+                font-size: 0.85rem;
+                height: 2.4rem;
+            }
+
+            .course-meta-item {
+                font-size: 0.75rem;
+            }
+
+            .current-price {
+                font-size: 1rem;
+            }
+
+            .enroll-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .course-level {
+                flex-direction: column;
+                gap: 0.3rem;
+                align-items: flex-start;
+            }
+
+            .course-level .badge-level {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.4rem;
+            }
+
+            .d-flex.justify-content-between.align-items-center {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch !important;
+            }
+
+            .course-price {
+                text-align: center;
+            }
+
+            .footer-links {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .course-card {
+                border-radius: 8px;
+            }
+
+            .course-info {
+                padding: 1rem;
+            }
+
+            .course-grid {
+                padding: 2rem 0;
+            }
+
+            .py-5 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+
+        /* Touch-friendly interactions for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .course-card:hover {
+                transform: none;
+            }
+
+            .category-btn:hover {
+                transform: none;
+            }
+
+            .enroll-btn:hover {
+                transform: none;
+            }
+
+            .btn-primary:hover {
+                transform: none;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .course-card {
+                border: 2px solid var(--primary-color);
+            }
+
+            .enroll-btn {
+                border: 2px solid white;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .course-card,
+            .category-btn,
+            .enroll-btn,
+            .btn-primary {
+                animation: none;
+                transition: none;
+            }
+
+            .course-card:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <i class="fas fa-graduation-cap me-2 text-primary fa-lg"></i>
-                <span class="fw-bold">منصة اركان التعليمية</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">الدورات</a>
-                    </li>
-                    
-                </ul>
-                <div class="ms-auto">
-                    
-                    <div id="userDropdown" class="d-none">
-                        <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown">
-            <i class="fas fa-user-circle me-1"></i>
-            <span id="userDisplayName">المستخدم</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-circle"></i> الملف الشخصي</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><button class="dropdown-item text-danger" id="logoutButton">
-                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-            </button></li>
-        </ul>
-    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     
 
    
 
-    <!-- Filters Section -->
-    <section class="filters">
+
+    <!-- Courses Categories Navigation -->
+    <section class="py-4 bg-light">
         <div class="container">
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="ابحث عن الدورات...">
-                <i class="fas fa-search search-icon"></i>
+            <div class="text-center mb-5">
+                <h2 class="mb-4" data-aos="fade-up">تصفح دوراتنا التعليمية</h2>
+                <div class="d-flex flex-wrap justify-content-center gap-3" id="courseCategories">
+                    <button class="category-btn active" data-category="all">
+                        <i class="fas fa-th-large me-2"></i> الكل
+                    </button>
+                    <button class="category-btn" data-category="languages">
+                        <i class="fas fa-language me-2"></i> دورات اللغات
+                    </button>
+                    <button class="category-btn" data-category="online">
+                        <i class="fas fa-laptop-code me-2"></i> دورات أونلاين
+                    </button>
+                    <button class="category-btn" data-category="private">
+                        <i class="fas fa-user-graduate me-2"></i> دروس خصوصية
+                    </button>
+                </div>
             </div>
-            <!-- تم حذف أزرار الفلترة هنا بناءً على طلبك -->
         </div>
     </section>
 
-    <!-- Courses Section -->
-<section id="courses" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-5" data-aos="fade-up">الدورات المتاحة</h2>
-        <div class="row g-4" id="coursesGrid">
-            <!-- بطاقات الدورات مباشرة في HTML -->
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="course-card card">
-                    <img src="https://img.icons8.com/color/200/000000/python.png" class="card-img-top" alt="مقدمة في البرمجة">
-                    <div class="card-body">
-                        <h5 class="card-title">مقدمة في البرمجة</h5>
-                        <p class="card-text">تعلم أساسيات البرمجة باستخدام لغة بايثون بطريقة سهلة وعملية.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="course-price">2000 دج</span>
-                            <a class="btn btn-primary" href="https://forms.gle/your-google-form-link" target="_blank">سجل الآن</a>
+    <!-- Language Courses Section -->
+    <section id="language-courses" class="py-5 category-section" data-category="languages">
+        <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title mb-0">
+                    <i class="fas fa-language me-2"></i> دورات تعليم اللغات
+                </h2>
+            </div>
+            <div class="row g-4 courses-grid">
+                <!-- English Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://www.mesrs.dz/wp-content/uploads/2023/07/improve_english-1024x550.gif" class="w-100" alt="دورة اللغة الإنجليزية">
+                            
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <span class="badge bg-success">الأكثر طلباً</span>
+                            </div>
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <button class="btn-icon">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> لغة إنجليزية
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">مبتدئ</span>
+                                    <span class="badge-level bg-secondary">متوسط</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">دورة اللغة الإنجليزية الشاملة</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> أ. أحمد محمد
+                            </p>
+                            <p class="course-description">احترف اللغة الإنجليزية من الصفر إلى الاحتراف مع أفضل المدرسين وخبرة تعليمية تفاعلية.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">3,500 دج</span>
+                                    <span class="original-price text-muted text-decoration-line-through ms-2">4,500 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- French Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://edraak-marketing-uploads.edraak.org/Courses/French-1.png" class="w-100" alt="دورة اللغة الفرنسية">
+                            
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <span class="badge bg-danger">جديد</span>
+                            </div>
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> لغة فرنسية
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">مبتدئ</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">تعلم الفرنسية من الصفر</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> أ. سارة أحمد
+                            </p>
+                            <p class="course-description">ابدأ رحلتك مع اللغة الفرنسية مع منهجية تعليمية ممتعة وسهلة الفهم.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">2,800 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Turkish Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/turkey.png" class="w-100" alt="دورة اللغة التركية">
+                            
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> لغة تركية
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">مبتدئ</span>
+                                    <span class="badge-level bg-info">متقدم</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">اللغة التركية للمبتدئين</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> د. محمد علي
+                            </p>
+                            <p class="course-description">تعلم اللغة التركية بطلاقة مع منهج متكامل يشمل المحادثة والقراءة والكتابة.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">3,200 دج</span>
+                                    <span class="original-price text-muted text-decoration-line-through ms-2">4,000 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- يمكنك تكرار البطاقة لدورات أخرى مع تغيير الرابط -->
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Online Courses Section -->
+    <section id="online-courses" class="py-5 bg-light category-section" data-category="online">
+        <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title mb-0">
+                    <i class="fas fa-laptop-code me-2"></i> دورات أونلاين
+                </h2>
+            </div>
+            <div class="row g-4 courses-grid">
+                <!-- Web Development Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/web-design.png" class="w-100" alt="تطوير الويب">
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> تطوير الويب
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-success">متوسط</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">تطوير تطبيقات الويب المتكاملة</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> م. خالد عبد الله
+                            </p>
+                            <p class="course-description">تعلم تطوير تطبيقات ويب متكاملة باستخدام أحدث التقنيات مثل React وNode.js.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">4,500 دج</span>
+                                    <span class="original-price text-muted text-decoration-line-through ms-2">6,000 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile App Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/mobile-app.png" class="w-100" alt="تطبيقات الجوال">
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> تطبيقات الجوال
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">مبتدئ</span>
+                                    <span class="badge-level bg-success">متوسط</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">تطوير تطبيقات الأندرويد</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> م. سامي أحمد
+                            </p>
+                            <p class="course-description">تعلم برمجة تطبيقات الأندرويد باستخدام Kotlin وAndroid Studio.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">3,800 دج</span>
+                                    <span class="original-price text-muted text-decoration-line-through ms-2">5,000 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Course -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/adobe-photoshop.png" class="w-100" alt="التصميم الجرافيكي">
+                            
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> تصميم جرافيك
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">مبتدئ</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">مقدمة في التصميم الجرافيكي</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> م. نورا محمد
+                            </p>
+                            <p class="course-description">تعلم أساسيات التصميم الجرافيكي باستخدام برامج Adobe Photoshop وIllustrator.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">3,000 دج</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    سجل الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Lessons Section -->
+    <section id="private-lessons" class="py-5 category-section" data-category="private">
+        <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title mb-0">
+                    <i class="fas fa-user-graduate me-2"></i> دروس خصوصية
+                </h2>
+            </div>
+            <div class="row g-4 courses-grid">
+                <!-- Math Private Lesson -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/math.png" class="w-100" alt="رياضيات خصوصي">
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> رياضيات
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-secondary">ثانوي</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">دروس خصوصية في الرياضيات</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> أ. علي محمود
+                            </p>
+                            <p class="course-description">دروس خصوصية في الرياضيات لطلاب الثانوية العامة مع مدرس متخصص.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">2,500 دج</span>
+                                    <span class="text-muted small d-block">للساعة الواحدة</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    احجز الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physics Private Lesson -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/physics.png" class="w-100" alt="فيزياء خصوصي">
+                            
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> فيزياء
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-secondary">جامعي</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">دروس خصوصية في الفيزياء الجامعية</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> د. محمد عبد الرحمن
+                            </p>
+                            <p class="course-description">شرح وافي لمقررات الفيزياء الجامعية مع حل التمارين والمسائل.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">3,000 دج</span>
+                                    <span class="text-muted small d-block">للساعة الواحدة</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    احجز الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Private Lesson -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-card h-100">
+                        <div class="position-relative">
+                            <img src="https://img.icons8.com/color/200/000000/conference-call.png" class="w-100" alt="إنجليزي خصوصي">
+                        </div>
+                        <div class="course-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="course-category text-muted small">
+                                    <i class="fas fa-tag me-1"></i> لغة إنجليزية
+                                </div>
+                                <div class="course-level">
+                                    <span class="badge-level bg-primary">جميع المستويات</span>
+                                </div>
+                            </div>
+                            <h3 class="course-title">دروس خصوصية في اللغة الإنجليزية</h3>
+                            <p class="course-instructor">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> أ. سارة خالد
+                            </p>
+                            <p class="course-description">دروس خصوصية في اللغة الإنجليزية لجميع المستويات مع مدرسة لغة أم.</p>
+
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="course-price">
+                                    <span class="current-price fw-bold" style="color: var(--primary-color); font-size: 1.3rem;">2,000 دج</span>
+                                    <span class="text-muted small d-block">للساعة الواحدة</span>
+                                </div>
+                                <a href="https://forms.google.com/your-form-here" class="enroll-btn" target="_blank">
+                                    احجز الآن <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
@@ -483,6 +1385,35 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+
+        // Course filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const courseSections = document.querySelectorAll('.category-section');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const selectedCategory = this.getAttribute('data-category');
+
+                    courseSections.forEach(section => {
+                        const sectionCategory = section.getAttribute('data-category');
+
+                        if (selectedCategory === 'all' || sectionCategory === selectedCategory) {
+                            section.style.display = 'block';
+                            // Re-initialize AOS for newly visible elements
+                            AOS.refresh();
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
